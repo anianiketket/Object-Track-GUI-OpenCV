@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( OpenCV-GUI )
+find_package( OpenCV REQUIRED )
+add_executable( OpenCV-GUI main.cpp )
+target_link_libraries( OpenCV-GUI ${OpenCV_LIBS} )
