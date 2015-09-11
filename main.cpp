@@ -55,13 +55,16 @@ void CreateTrackBars(void)
     createTrackbar("Contrast","GUI",&slider_gamma,150);
 }
 
-int main(int argc, char *argv[])
+int* SetParameter(void)
 {
+    int return_values[8];
+    int *point;
     ocl::setUseOpenCL(false);
 
     //Initialise webcam
     VideoCapture cap(0);
 
+    //Create a figure
     namedWindow("GUI",WINDOW_NORMAL);
 
     //Create tarckbars on window
@@ -70,8 +73,10 @@ int main(int argc, char *argv[])
     //Check if webcam is ready
     if(!cap.isOpened())
     {
-        return -1;
+        *point = -1;
+        return point;
     }
+
     vid_h = cap.get(CAP_PROP_FRAME_HEIGHT);
     vid_w = cap.get(CAP_PROP_FRAME_WIDTH);
 
@@ -83,5 +88,27 @@ int main(int argc, char *argv[])
         if(waitKey(30)=='q')
             break;
     }
-    return 0;
+
+    //Close the video capture class
+    cap.release();
+
+    //Fill the array with all the parameters
+    return_values[0]=slider_Rmin;
+    return_values[1]=slider_Rmax;
+    return_values[2]=slider_Gmin;
+    return_values[3]=slider_Gmax;
+    return_values[4]=slider_Bmin;
+    return_values[5]=slider_Bmax;
+    return_values[6]=slider_brightness;
+    return_values[7]=slider_gamma;
+    point = &return_values[0];
+    return point;
+}
+
+int main(int argc, char *argv[])
+{
+    int *returned_pointer;
+
+    returned_pointer = SetParameter();
+    cout << "The first value is" << *returned_pointer << "\n";
 }
