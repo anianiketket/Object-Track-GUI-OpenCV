@@ -1,0 +1,64 @@
+#include "opencv2/opencv.hpp"
+#include <opencv2/core/ocl.hpp>
+#inlcude <iostream.h>
+
+using namespace cv;
+using namespace std;
+
+volatile int slider_Rmin,slider_Rmax,slider_Gmin,slider_Gmax,slider_Bmin,slider_Bmax,slider_brightness,slider_gamma;
+
+int main(int argc, char *argv[])
+{
+	ocl::setUseOpenCL(false);
+    //Initialise webcam
+    VideoCapture cap(0);
+
+    namedWindow("GUI",1);
+    namedWindow("Track",1);
+    //Create tarckbars on window
+    //CreateTrackBars();
+	
+    createTrackbar("Rmin","Track",&slider_Rmin,255,Threshold);
+    createTrackbar("Rmax","Track",&slider_Rmax,255,Threshold);
+    createTrackbar("Gmin","Track",&slider_Gmin,255,Threshold);
+    createTrackbar("Gmax","Track",&slider_Gmax,255,Threshold);
+    createTrackbar("Bmin","Track",&slider_Bmin,255,Threshold);
+    createTrackbar("Bmax","Track",&slider_Bmax,255,Threshold);	
+
+    //Check if webcam is ready
+    if(!cap.isOpened())
+    {
+        return -1;
+    }
+
+    //Infinite loop of program
+    while(1)
+    {
+        Mat frame,binary;
+        cap >> frame;
+        imshow("GUI",binary);
+        if(waitKey(30)=='q')
+            break;
+    }
+    return 0;
+}
+
+void Threshold(int,void*)
+{
+    cout << slider_Rmin << "\n";
+    cout << slider_Rmax << "\n";
+    cout << slider_Gmin << "\n";
+    cout << slider_Gmax << "\n";
+    cout << slider_Bmin << "\n";
+    cout << slider_Bmax << "\n";
+}
+
+void CreateTrackBars(void)
+{
+    createTrackbar(Rmin,"GUI",&slider_Rmin,255,Threshold);
+    createTrackbar(Rmax,"GUI",&slider_Rmax,255,Threshold);
+    createTrackbar(Gmin,"GUI",&slider_Gmin,255,Threshold);
+    createTrackbar(Gmax,"GUI",&slider_Gmax,255,Threshold);
+    createTrackbar(Bmin,"GUI",&slider_Bmin,255,Threshold);
+    createTrackbar(Bmax,"GUI",&slider_Bmax,255,Threshold);
+}
