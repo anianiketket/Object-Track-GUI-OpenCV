@@ -7,10 +7,18 @@
 #IncludeRegexTransform: 
 
 /home/anianiketket/Desktop/OpenCV_projects/OpenCV-GUI/main.cpp
-iostream
--
 opencv2/opencv.hpp
 /home/anianiketket/Desktop/OpenCV_projects/OpenCV-GUI/opencv2/opencv.hpp
 opencv2/core/ocl.hpp
+-
+set_value.h
+/home/anianiketket/Desktop/OpenCV_projects/OpenCV-GUI/set_value.h
+
+/home/anianiketket/Desktop/OpenCV_projects/OpenCV-GUI/set_value.h
+opencv2/opencv.hpp
+/home/anianiketket/Desktop/OpenCV_projects/OpenCV-GUI/opencv2/opencv.hpp
+opencv2/core/ocl.hpp
+-
+iostream
 -
 
